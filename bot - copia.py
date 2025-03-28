@@ -1,30 +1,9 @@
-import os
 from fastapi import FastAPI
 import requests
 
 app = FastAPI()
 
-
-async def verify_webhook(request: Request):
-    challenge = request.query_params.get("hub.challenge")
-    token = request.query_params.get("hub.verify_token")
-
-    if token == VERIFY_TOKEN:
-        return int(challenge)  # Meta espera un número, no un string
-    return {"error": "Token inválido"}, 403
-import os 
-from fastapi import FastAPI, Request
-
-app = FastAPI()
 VERIFY_TOKEN = "miWebhooksalesiaSeguro"
-
-async def verify_webhook(request: Request):
-    challenge = request.query_params.get("hub.challenge")
-    token = request.query_params.get("hub.verify_token")
-
-    if token == VERIFY_TOKEN:
-        return int(challenge)  # Meta espera un número, no un string
-    return {"error": "Token inválido"}, 403
 
 @app.get("/")
 def home():
