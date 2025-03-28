@@ -32,8 +32,10 @@ def home():
 
 
 @app.get("/webhook")
-def verify_webhook():
-    return {"status": "ok"}
+def verify_webhook(hub_mode: str = None, hub_verify_token: str = None, hub_challenge: str = None):
+    if hub_mode == "subscribe" and hub_verify_token == VERIFY_TOKEN:
+        return int(hub_challenge)  # Meta espera un número, no un string
+    return {"error": "Token inválido"}, 403
 
 @app.post("/send_message/")
 def send_message(phone: str, message: str):
