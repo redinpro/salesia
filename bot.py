@@ -23,7 +23,7 @@ def verify_webhook(hub_mode: str = None, hub_verify_token: str = None, hub_chall
     """
     if hub_mode == "subscribe" and hub_verify_token == VERIFY_TOKEN:
         # Retornamos el 'hub.challenge' tal como lo envía Meta
-        return hub_challenge
+        return int(hub_challenge)  # Meta espera un número, no un string
     return {"error": "Token inválido"}, 403
 
 @app.post("/webhook")
@@ -61,6 +61,6 @@ def send_message(phone: str, message: str):
         response = requests.post(url, json=data, headers=headers)  # Realizamos la solicitud POST
         print("Respuesta de WhatsApp:", response.json())  # Imprimimos la respuesta para depuración
         return response.json()  # Retornamos la respuesta de la API de WhatsApp
-        except Exception as e:
+    except Exception as e:
         print(f"Error al enviar el mensaje: {e}")
         return {"error": "Error interno al enviar el mensaje"}, 500
