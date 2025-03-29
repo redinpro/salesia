@@ -6,7 +6,7 @@ import requests
 app = FastAPI()
 
 # Token de verificación para Meta
-VERIFY_TOKEN = "miWebhooksalesiaSeguro"  # Cambia este valor según el configurado en Meta Developer
+VERIFY_TOKEN = "Santy365849"  # Cambia este valor según el configurado en Meta Developer
 
 @app.get("/")
 def home():
